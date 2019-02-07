@@ -42,12 +42,28 @@ namespace fp {
 		
 		
 	};
+	template<std:: size_t I1, std:: size_t F1, std:: size_t I2, std:: size_t F2>
+	int64_t operator+(fixed <I1, F1> lhs , fixed <I2, F2> rhs){
+		int64_t res=0;
+		
+		std::cout<<"Passage";
+		if(F1==F2)return lhs+rhs;
+		std::cout<<"Passage";
+		if(F1>F2){
+			res+=rhs.value<<(F1-F2);
+		}
+		else{
+			res+=lhs.value<<(F2-F1);
+		}
+		return lhs+rhs;
+	}
+	
 	template <typename Fixed>
 		struct fixed_traits{
 			static constexpr Fixed lowest(){
-				fixed f<Fixed::integer_part,Fixed::fractional_part>();
+				fixed <Fixed::integer_part,Fixed::fractional_part>f();
 				size_t n=Fixed::integer_part+Fixed::fractional_part;
-				f.value=-std::exp2(n-1);
+				f.value=-(2<<(n-1));
 				return f;
 			}
 			static constexpr Fixed max(){
