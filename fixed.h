@@ -39,13 +39,21 @@ namespace fp {
 		operator double() const{
 			return (double)value/std::exp2(fractional_part);
 		}
-		
+		operator float() const{
+			return (float)value/std::exp2(fractional_part);
+		}
+		/*
+		* copy  constructors
+		*/
+		fixed(const fixed& other){
+			value=other.value;
+		}
 		
 	};
 	template<std:: size_t I1, std:: size_t F1, std:: size_t I2, std:: size_t F2>
 	int64_t operator+(fixed <I1, F1> lhs , fixed <I2, F2> rhs){
 		int64_t res=0;
-		
+
 		std::cout<<"Passage";
 		if(F1==F2)return lhs+rhs;
 		std::cout<<"Passage";
@@ -58,7 +66,7 @@ namespace fp {
 		return lhs+rhs;
 	}
 	
-	template <typename Fixed>
+	template <typename Fixed>  //fixed_traits<...>::max()
 		struct fixed_traits{
 			static constexpr Fixed lowest(){
 				fixed <Fixed::integer_part,Fixed::fractional_part>f();
