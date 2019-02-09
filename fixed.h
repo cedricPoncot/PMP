@@ -94,11 +94,23 @@ namespace fp {
 		/*
 		* compound  assignment  operators
 		*/
-		fixed& operator+=( const fixed& other);
-		fixed& operator+=( float other);
-		fixed& operator+=( double other);
+		fixed& operator+=( const fixed& other){
+			this->value=*this+other;
+			return *this;
+		}
+		fixed& operator+=( float other){
+			this->value=*this+fixed(other);
+			return *this;
+		}
+		fixed& operator+=( double other){
+			this->value=*this+fixed(other);
+			return *this;
+		}
 		template<std::size_t  OtherInt , std::size_t  OtherFrac>
-		fixed& operator+=( const fixed <OtherInt , OtherFrac >&  other );
+		fixed& operator+=( const fixed <OtherInt , OtherFrac >&  other ){
+			this->value=*this+fixed(other);
+			return *this;
+		}
 	
 		fixed& operator-=( const fixed& other);
 		fixed& operator-=( float other);
