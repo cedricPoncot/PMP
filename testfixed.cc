@@ -4,7 +4,8 @@
 
 #include "gtest/gtest.h"
 
-#include "fixed.h"
+#include "fixed.cc"
+
 
 
 //***************Test Contructeur OK*********************
@@ -142,6 +143,7 @@ TEST(FixedTest, operateurPlusTypeDifferent) {
 	fp::fixed<4ul,4ul> h(2.25d);
 	EXPECT_EQ(f+h,72);
 }
+
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
