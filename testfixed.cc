@@ -6,18 +6,6 @@
 
 #include "fixed.h"
 
-/**BOUCLE INFINIE (TODO)
-TEST(FixedTest, operateurPlus) {
-	fp::fixed<4ul,4ul> f(2.25d);
-	fp::fixed<4ul,4ul> h(2.25d);
-	std::cout << fp::operator+(f, h) << std::endl;
-
-}**/
-/*
-TEST(FixedTest, lowest) {
-	//std::cout<<fp::fixed<4ul,4ul>.fixed_traits.lowest().value;
-	EXPECT_EQ(Fixed<4ul,4ul>fixed_traits.lowest().value, -8);
-}*/
 
 //***************Test Contructeur OK*********************
 TEST(FixedTest, constructeurFloat) {
@@ -101,6 +89,31 @@ TEST(FixedTest, CopyConstructorTypeDifferent) {
 	EXPECT_EQ(f5.value, 72u);
 }
 
+//*****************Test CopyAssignement *************************
+TEST(FixedTest, CopyAssignementMemeType) {
+	fp::fixed<4ul,4ul> f0(2.25f);
+	fp::fixed<4ul,4ul> f1(1.75f);
+	f1=f0;
+	EXPECT_EQ(f1.value, 36u);
+}
+TEST(FixedTest, CopyAssignementTypeDifferent) {
+	fp::fixed<4ul,4ul> f0(2.25f);
+	fp::fixed<4ul,4ul> f1(1.);
+	fp::fixed<4ul,4ul> f2(1.1f);
+	fp::fixed<4ul,4ul> f3(-4.);
+	fp::fixed<4ul,4ul> f4(2.25f);
+	fp::fixed<4ul,4ul> f5(4.44f);
+	f1=f0;
+	f2=f1;
+	f3=f2;
+	f4=f3;
+	f5=f4;
+	EXPECT_EQ(f1.value, 36u);
+	EXPECT_EQ(f2.value, 36u);
+	EXPECT_EQ(f3.value, 36u);
+	EXPECT_EQ(f4.value, 36u);
+	EXPECT_EQ(f5.value, 36u);
+}
 //*****************Test FixedTraits *************************
 
 TEST(FixedTest,min){
@@ -117,7 +130,18 @@ TEST(FixedTest,lowest){
 	fp::fixed<2,2> f=fp::fixed_traits<fp::fixed<2,2>>::lowest();
 	EXPECT_EQ((double)f,0.25d);
 }
+//*******************Test Operateur + (TODO)********************
+TEST(FixedTest, operateurPlus) {
+	fp::fixed<4ul,4ul> f(2.25d);
+	fp::fixed<4ul,4ul> h(2.25d);
+	EXPECT_EQ(f+h,72);
+}
 
+TEST(FixedTest, operateurPlusTypeDifferent) {
+	fp::fixed<3ul,4ul> f(2.25d);
+	fp::fixed<4ul,4ul> h(2.25d);
+	EXPECT_EQ(f+h,72);
+}
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

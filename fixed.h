@@ -34,7 +34,25 @@ namespace fp {
 			}
 			value=x*std::exp2(fractional_part);
 		}
+		/*
+		* copy  assignment
+		*/
 		
+		fixed& operator=(const fixed& other){
+			this->value=other.value;
+			return *this;
+		}
+		template <std:: size_t  OtherInt , std:: size_t  OtherFrac >
+		fixed& operator=(const fixed <OtherInt , OtherFrac >&  other ){
+			if(fractional_part==OtherFrac)this.value=other.value;
+			if(fractional_part>OtherFrac){
+				this.value=other.value<<(fractional_part-OtherFrac);
+			}
+			else{
+				this.value=other.value>>(OtherFrac-fractional_part);
+			}
+			return *this;
+		}
 		
 		operator double() const{
 			return (double)value/std::exp2(fractional_part);
@@ -62,18 +80,14 @@ namespace fp {
 	};
 	template<std:: size_t I1, std:: size_t F1, std:: size_t I2, std:: size_t F2>
 	int64_t operator+(fixed <I1, F1> lhs , fixed <I2, F2> rhs){
-		int64_t res=0;
 
-		std::cout<<"Passage";
-		if(F1==F2)return lhs+rhs;
-		std::cout<<"Passage";
+		if(F1==F2)return lhs.value+rhs.value;
 		if(F1>F2){
-			res+=rhs.value<<(F1-F2);
+			return (rhs.value<<(F1-F2))+lhs.value;
 		}
 		else{
-			res+=lhs.value<<(F2-F1);
+			return (lhs.value>>(F2-F1))+rhs.value;
 		}
-		return lhs+rhs;
 	}
 	
 	template <typename Fixed>  //fixed_traits<...>::max()
