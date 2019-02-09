@@ -20,7 +20,7 @@ namespace fp {
 		static  constexpr std::size_t  fractional_part = Frac;
 		fixed()=default;
 		constexpr  explicit fixed(float x){
-			//static_assert(Int+Frac<=64,"Erreur");
+			//static_assert(Int+Frac<=64&&Int+Frac>0,"Erreur");
 			size_t n=Int+Frac;
 			if (x<-std::exp2(n-1)/n || (x>std::exp2(n-1)-1)/n) {
 				throw std::overflow_error("Debordement de bit");
@@ -28,7 +28,7 @@ namespace fp {
 			value=x*std::exp2(fractional_part);
 		}
 		constexpr  explicit fixed(double x){
-			//static_assert(Int+Frac<=64,"Erreur");
+			//static_assert(Int+Frac<=64&&Int+Frac>0,"Erreur");
 			if ((int)x>std::exp2(integer_part-1)-1) {
 				throw std::overflow_error("Debordement de bit");
 			}
@@ -43,10 +43,20 @@ namespace fp {
 			return (float)value/std::exp2(fractional_part);
 		}
 		/*
-		* copy  constructors
+		* copy  constructor
 		*/
 		fixed(const fixed& other){
 			value=other.value;
+		}
+		template <std::size_t OtherInt,std::size_t OtherFrac >
+		fixed(const fixed <OtherInt , OtherFrac >& other){
+			if(fractional_part==OtherFrac)value=other.value;
+			if(fractional_part>OtherFrac){
+				value=other.value<<(fractional_part-OtherFrac);
+			}
+			else{
+				value=other.value>>(OtherFrac-fractional_part);
+			}
 		}
 		
 	};
@@ -68,14 +78,22 @@ namespace fp {
 	
 	template <typename Fixed>  //fixed_traits<...>::max()
 		struct fixed_traits{
-			static constexpr Fixed lowest(){
-				fixed <Fixed::integer_part,Fixed::fractional_part>f();
+			static constexpr Fixed min(){
+				fixed <Fixed::integer_part,Fixed::fractional_part>f(0.0);
 				size_t n=Fixed::integer_part+Fixed::fractional_part;
-				f.value=-(2<<(n-1));
+				f.value=-(2<<(n-2));
+				return f;
+			}
+			static constexpr Fixed lowest(){
+				fixed <Fixed::integer_part,Fixed::fractional_part>f(0.0);
+				f.value=1;
 				return f;
 			}
 			static constexpr Fixed max(){
-
+				fixed <Fixed::integer_part,Fixed::fractional_part>f(0.0);
+				size_t n=Fixed::integer_part+Fixed::fractional_part;
+				f.value=(2<<(n-2))-1;
+				return f;
 			}
 		};
 
