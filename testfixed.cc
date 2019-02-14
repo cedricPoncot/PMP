@@ -117,8 +117,8 @@ TEST(FixedTest, CopyAssignementTypeDifferent) {
 }
 //*****************Test FixedTraits *************************
 
-TEST(FixedTest,min){
-	fp::fixed<2,2> f=fp::fixed_traits<fp::fixed<2,2>>::min();
+TEST(FixedTest,lowest){
+	fp::fixed<2,2> f=fp::fixed_traits<fp::fixed<2,2>>::lowest();
 	EXPECT_EQ(f.value,-8);
 }
 
@@ -127,27 +127,32 @@ TEST(FixedTest,max){
 	EXPECT_EQ(f.value,7u);
 }
 
-TEST(FixedTest,lowest){
-	fp::fixed<2,2> f=fp::fixed_traits<fp::fixed<2,2>>::lowest();
+TEST(FixedTest,min){
+	fp::fixed<2,2> f=fp::fixed_traits<fp::fixed<2,2>>::min();
 	EXPECT_EQ((double)f,0.25d);
 }
 //*******************Test Operateur + OK********************
 TEST(FixedTest, operateurPlus) {
-	fp::fixed<4ul,4ul> f(2.25d);
-	fp::fixed<4ul,4ul> h(2.25d);
+	fp::fixed<4,4> f(2.25d);
+	fp::fixed<4,4> h(2.25d);
 	EXPECT_EQ(f+h,72);
 }
 
 TEST(FixedTest, operateurPlusTypeDifferent) {
-	fp::fixed<3ul,4ul> f(2.25d);
-	fp::fixed<4ul,4ul> h(2.25d);
+	fp::fixed<3,4> f(2.25d);
+	fp::fixed<4,4> h(2.25d);
 	EXPECT_EQ(f+h,72);
+}
+TEST(FixedTest, operateurPlusTypeDifferent2) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<4,5> g(2.25);
+	EXPECT_EQ(f+g, 144u);
 }
 //*******************Test Operateur + FAIL ********************
 TEST(FixedTest, operateurPlusFailDebordementMax1) {
 	try {
-		fp::fixed<2ul,2ul> f(1.50f);
-		fp::fixed<2ul,2ul> g(0.5f);
+		fp::fixed<2,2> f(1.50f);
+		fp::fixed<2,2> g(0.5f);
 		f+g;
 	} catch (std::overflow_error& e) {
 		EXPECT_STREQ("Debordement de bit", e.what());
@@ -156,8 +161,8 @@ TEST(FixedTest, operateurPlusFailDebordementMax1) {
 
 TEST(FixedTest, operateurPlusFailDebordementMax2) {
 	try {
-		fp::fixed<2ul,2ul> f(1.50f);
-		fp::fixed<1ul,2ul> g(0.5f);
+		fp::fixed<2,2> f(1.50f);
+		fp::fixed<1,2> g(0.5f);
 		f+g;
 	} catch (std::overflow_error& e) {
 		EXPECT_STREQ("Debordement de bit", e.what());
@@ -193,8 +198,8 @@ TEST(FixedTest, operateurPlusFailDebordementMin2) {
 }
 TEST(FixedTest, operateurPlusFailDebordementMin3) {
 	try {
-		fp::fixed<2ul,2ul> f(-1.50);
-		fp::fixed<2ul,3ul> g(-0.375);
+		fp::fixed<2,2> f(-1.50);
+		fp::fixed<2,3> g(-0.375);
 		f+g;
 	} catch (std::overflow_error& e) {
 		EXPECT_STREQ("Debordement de bit", e.what());
@@ -217,8 +222,8 @@ TEST(FixedTest, operateurMoinstypeDifferent1) {
 	EXPECT_EQ(f-h,0);
 }
 TEST(FixedTest, operateurMoinstypeDifferent2) {
-	fp::fixed<3ul,4ul> f(2.25d);
-	fp::fixed<4ul,4ul> h(-2.25d);
+	fp::fixed<3,4> f(2.25d);
+	fp::fixed<4,4> h(-2.25d);
 	EXPECT_EQ(f-h,72);
 }
 //******************Test Operateur - FAIL*****************************
@@ -253,8 +258,8 @@ TEST(FixedTest, operateurMoinsFailDebordementMax3) {
 }
 TEST(FixedTest, operateurMoinsFailDebordementMin1) {
 	try {
-		fp::fixed<2ul,2ul> f(-1.50);
-		fp::fixed<2ul,2ul> g(0.75);
+		fp::fixed<2,2> f(-1.50);
+		fp::fixed<2,2> g(0.75);
 		f-g;
 	} catch (std::overflow_error& e) {
 		EXPECT_STREQ("Debordement de bit", e.what());
@@ -263,8 +268,8 @@ TEST(FixedTest, operateurMoinsFailDebordementMin1) {
 
 TEST(FixedTest, operateurMoinsFailDebordementMin2) {
 	try {
-		fp::fixed<2ul,2ul> f(-1.50);
-		fp::fixed<1ul,2ul> g(0.5);
+		fp::fixed<2,2> f(-1.50);
+		fp::fixed<1,2> g(0.5);
 		f-g;
 	} catch (std::overflow_error& e) {
 		EXPECT_STREQ("Debordement de bit", e.what());
@@ -272,8 +277,8 @@ TEST(FixedTest, operateurMoinsFailDebordementMin2) {
 }
 TEST(FixedTest, operateurMoinsFailDebordementMin3) {
 	try {
-		fp::fixed<2ul,2ul> f(-1.50);
-		fp::fixed<2ul,3ul> g(0.375);
+		fp::fixed<2,2> f(-1.50);
+		fp::fixed<2,3> g(0.375);
 		f-g;
 	} catch (std::overflow_error& e) {
 		EXPECT_STREQ("Debordement de bit", e.what());
@@ -281,40 +286,40 @@ TEST(FixedTest, operateurMoinsFailDebordementMin3) {
 }
 //******************Test Operateur += *****************************
 TEST(FixedTest, operateurPlusEgal) {
-	fp::fixed<4ul,4ul> f(2.25);
-	fp::fixed<4ul,4ul> g(2.25);
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<4,4> g(2.25);
 	f+=g;
-	EXPECT_EQ(f.value, 72u);
+	EXPECT_EQ(f.value, 72);
 }
 TEST(FixedTest, operateurPlusEgalDouble) {
-	fp::fixed<4ul,4ul> f(2.25);
+	fp::fixed<4,4> f(2.25);
 	double valeur=2.25;
 	f+=valeur;
-	EXPECT_EQ(f.value, 72u);
+	EXPECT_EQ(f.value, 72);
 }
 TEST(FixedTest, operateurPlusEgalFloat) {
-	fp::fixed<4ul,4ul> f(2.25);
+	fp::fixed<4,4> f(2.25);
 	float valeur=2.25;
 	f+=valeur;
-	EXPECT_EQ(f.value, 72u);
+	EXPECT_EQ(f.value, 72);
 }
 TEST(FixedTest, operateurPlusEgalTypeDifferent0) {
-	fp::fixed<4ul,4ul> f(2.25);
-	fp::fixed<3ul,4ul> g(2.25);
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<3,4> g(2.25);
 	f+=g;
-	EXPECT_EQ(f.value, 72u);
+	EXPECT_EQ(f.value, 72);
 }
 TEST(FixedTest, operateurPlusEgalTypeDifferent1) {
-	fp::fixed<4ul,4ul> f(2.25);
-	fp::fixed<5ul,4ul> g(2.25);
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<5,4> g(2.25);
 	f+=g;
-	EXPECT_EQ(f.value, 72u);
+	EXPECT_EQ(f.value, 72);
 }
 TEST(FixedTest, operateurPlusEgalTypeDifferent2) {
-	fp::fixed<4ul,4ul> f(2.25);
-	fp::fixed<5ul,5ul> g(2.25);
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<5,5> g(2.25);
 	f+=g;
-	EXPECT_EQ(f.value, 144u);
+	EXPECT_EQ(f.value, 144);
 }
 
 //********************* FIN TEST **********************************************

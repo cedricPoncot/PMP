@@ -15,21 +15,21 @@ namespace fp{
 		if(I1>I2){
 			if(F1==F2){
 				res=lhs.value+rhs.value;
-				if(res>fixed_traits<fixed<I1,F1>>::max().value || res<fixed_traits<fixed<I1,F1>>::min().value){
+				if(res>fixed_traits<fixed<I1,F1>>::max().value || res<fixed_traits<fixed<I1,F1>>::lowest().value){
 					throw std::overflow_error("Debordement de bit");
 				}
 				return res;
 			}
-			if(F1>F2){
+			else if(F1>F2){
 				res=(rhs.value<<(F1-F2))+lhs.value;
-				if(res>fixed_traits<fixed<I1,F1>>::max().value || res<fixed_traits<fixed<I1,F1>>::min().value){
+				if(res>fixed_traits<fixed<I1,F1>>::max().value || res<fixed_traits<fixed<I1,F1>>::lowest().value){
 					throw std::overflow_error("Debordement de bit");
 				}
 				return res;
 			}
 			else{
-				res=(lhs.value>>(F2-F1))+rhs.value;
-				if(res>fixed_traits<fixed<I1,F2>>::max().value || res<fixed_traits<fixed<I1,F2>>::min().value){
+				res=(lhs.value<<(F2-F1))+rhs.value;
+				if(res>fixed_traits<fixed<I1,F2>>::max().value || res<fixed_traits<fixed<I1,F2>>::lowest().value){
 				
 					throw std::overflow_error("Debordement de bit");
 				}
@@ -39,21 +39,22 @@ namespace fp{
 		else{
 			if(F1==F2){
 				res=lhs.value+rhs.value;
-				if(res>fixed_traits<fixed<I2,F1>>::max().value || res<fixed_traits<fixed<I2,F1>>::min().value){
+				if(res>fixed_traits<fixed<I2,F1>>::max().value || res<fixed_traits<fixed<I2,F1>>::lowest().value){
 					throw std::overflow_error("Debordement de bit");
 				}
 				return res;
 			}
-			if(F1>F2){
+			else if(F1>F2){
 				res=(rhs.value<<(F1-F2))+lhs.value;
-				if(res>fixed_traits<fixed<I2,F1>>::max().value || res<fixed_traits<fixed<I2,F1>>::min().value){
+				if(res>fixed_traits<fixed<I2,F1>>::max().value || res<fixed_traits<fixed<I2,F1>>::lowest().value){
 					throw std::overflow_error("Debordement de bit");
 				}
 				return res;
 			}
 			else{
-				res=(lhs.value>>(F2-F1))+rhs.value;
-				if(res>fixed_traits<fixed<I2,F2>>::max().value || res<fixed_traits<fixed<I2,F2>>::min().value){
+				res=(lhs.value<<(F2-F1))+rhs.value;
+				//res=0;
+				if(res>fixed_traits<fixed<I2,F2>>::max().value || res<fixed_traits<fixed<I2,F2>>::lowest().value){
 					throw std::overflow_error("Debordement de bit");
 				}
 				return res;
@@ -66,21 +67,21 @@ namespace fp{
 		if(I1>I2){
 			if(F1==F2){
 				res=lhs.value-rhs.value;
-				if(res>fixed_traits<fixed<I1,F1>>::max().value || res<fixed_traits<fixed<I1,F1>>::min().value){
+				if(res>fixed_traits<fixed<I1,F1>>::max().value || res<fixed_traits<fixed<I1,F1>>::lowest().value){
 					throw std::overflow_error("Debordement de bit");
 				}
 				return res;
 			}
-			if(F1>F2){
+			else if(F1>F2){
 				res=(rhs.value<<(F1-F2))-lhs.value;
-				if(res>fixed_traits<fixed<I1,F1>>::max().value || res<fixed_traits<fixed<I1,F1>>::min().value){
+				if(res>fixed_traits<fixed<I1,F1>>::max().value || res<fixed_traits<fixed<I1,F1>>::lowest().value){
 					throw std::overflow_error("Debordement de bit");
 				}
 				return res;
 			}
 			else{
-				res=(lhs.value>>(F2-F1))-rhs.value;
-				if(res>fixed_traits<fixed<I1,F2>>::max().value || res<fixed_traits<fixed<I1,F2>>::min().value){
+				res=(lhs.value<<(F2-F1))-rhs.value;
+				if(res>fixed_traits<fixed<I1,F2>>::max().value || res<fixed_traits<fixed<I1,F2>>::lowest().value){
 				
 					throw std::overflow_error("Debordement de bit");
 				}
@@ -90,21 +91,21 @@ namespace fp{
 		else{
 			if(F1==F2){
 				res=lhs.value-rhs.value;
-				if(res>fixed_traits<fixed<I2,F1>>::max().value || res<fixed_traits<fixed<I2,F1>>::min().value){
+				if(res>fixed_traits<fixed<I2,F1>>::max().value || res<fixed_traits<fixed<I2,F1>>::lowest().value){
 					throw std::overflow_error("Debordement de bit");
 				}
 				return res;
 			}
-			if(F1>F2){
+			else if(F1>F2){
 				res=(rhs.value<<(F1-F2))-lhs.value;
-				if(res>fixed_traits<fixed<I2,F1>>::max().value || res<fixed_traits<fixed<I2,F1>>::min().value){
+				if(res>fixed_traits<fixed<I2,F1>>::max().value || res<fixed_traits<fixed<I2,F1>>::lowest().value){
 					throw std::overflow_error("Debordement de bit");
 				}
 				return res;
 			}
 			else{
-				res=(lhs.value>>(F2-F1))-rhs.value;
-				if(res>fixed_traits<fixed<I2,F2>>::max().value || res<fixed_traits<fixed<I2,F2>>::min().value){
+				res=(lhs.value<<(F2-F1))-rhs.value;
+				if(res>fixed_traits<fixed<I2,F2>>::max().value || res<fixed_traits<fixed<I2,F2>>::lowest().value){
 				
 					throw std::overflow_error("Debordement de bit");
 				}

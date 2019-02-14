@@ -108,15 +108,27 @@ namespace fp {
 		}
 		template<std::size_t  OtherInt , std::size_t  OtherFrac>
 		fixed& operator+=( const fixed <OtherInt , OtherFrac >&  other ){
-			this->value=*this+fixed(other);
+			this->value=*this+other;
 			return *this;
 		}
 	
-		fixed& operator-=( const fixed& other);
-		fixed& operator-=( float other);
-		fixed& operator-=( double other);
+		fixed& operator-=( const fixed& other){
+			this->value=*this-other;
+			return *this;
+		}
+		fixed& operator-=( float other){
+			this->value=*this-fixed(other);
+			return *this;
+		}
+		fixed& operator-=( double other){
+			this->value=*this-fixed(other);
+			return *this;
+		}
 		template<std::size_t  OtherInt , std::size_t  OtherFrac>
-		fixed& operator-=( const fixed <OtherInt , OtherFrac >&  other );
+		fixed& operator-=( const fixed <OtherInt , OtherFrac >&  other ){
+			this->value=*this+other;
+			return *this;
+		}
 	
 		fixed& operator*=( const fixed& other);
 		fixed& operator*=( float other);
@@ -179,13 +191,13 @@ namespace fp {
 	*/
 	template <typename Fixed>  //fixed_traits<...>::max()
 		struct fixed_traits{
-			static constexpr Fixed min(){
+			static constexpr Fixed lowest(){
 				fixed <Fixed::integer_part,Fixed::fractional_part>f(0.0);
 				size_t n=Fixed::integer_part+Fixed::fractional_part;
 				f.value=-(2<<(n-2));
 				return f;
 			}
-			static constexpr Fixed lowest(){
+			static constexpr Fixed min(){
 				fixed <Fixed::integer_part,Fixed::fractional_part>f(0.0);
 				f.value=1;
 				return f;
