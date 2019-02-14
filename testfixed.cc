@@ -322,6 +322,85 @@ TEST(FixedTest, operateurPlusEgalTypeDifferent2) {
 	EXPECT_EQ(f.value, 144);
 }
 
+//******************Test Operateur -= *****************************
+TEST(FixedTest, operateurMoinsEgal) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<4,4> g(-2.25);
+	f-=g;
+	EXPECT_EQ(f.value, 72);
+}
+TEST(FixedTest, operateurMoinsEgalDouble) {
+	fp::fixed<4,4> f(2.25);
+	double valeur=-2.25;
+	f-=valeur;
+	EXPECT_EQ(f.value, 72);
+}
+TEST(FixedTest, operateurMoinsEgalFloat) {
+	fp::fixed<4,4> f(2.25);
+	float valeur=-2.25;
+	f-=valeur;
+	EXPECT_EQ(f.value, 72);
+}
+TEST(FixedTest, operateurMoinsEgalTypeDifferent0) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<3,4> g(-2.25);
+	f-=g;
+	EXPECT_EQ(f.value, 72);
+}
+TEST(FixedTest, operateurMoinsEgalTypeDifferent1) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<5,4> g(-2.25);
+	f-=g;
+	EXPECT_EQ(f.value, 72);
+}
+TEST(FixedTest, operateurMoinsEgalTypeDifferent2) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<5,5> g(-2.25);
+	f-=g;
+	EXPECT_EQ(f.value, 144);
+}
+//******************Test Operateur == *****************************
+TEST(FixedTest, operateurEgal0) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<4,4> g(2.25);
+	EXPECT_TRUE(f==g);
+}
+TEST(FixedTest, operateurEgal1) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<5,4> g(2.25);
+	EXPECT_TRUE(f==g);
+}
+TEST(FixedTest, operateurEgal2) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<4,5> g(2.25);
+	EXPECT_TRUE(f==g);
+}
+TEST(FixedTest, operateurEgal3) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<5,5> g(2.25);
+	EXPECT_TRUE(f==g);
+}
+//******************Test Operateur < *****************************
+TEST(FixedTest, operateurInf0) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<4,4> g(2.25);
+	EXPECT_FALSE(f<g);
+}
+TEST(FixedTest, operateurInf1) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<4,4> g(2.5);
+	EXPECT_TRUE(f<g);
+}
+TEST(FixedTest, operateurInf2) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<5,5> g(2.5);
+	EXPECT_TRUE(f<g);
+}
+TEST(FixedTest, operateurInf3) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<5,5> g(2.25);
+	EXPECT_FALSE(f<g);
+}
 //********************* FIN TEST **********************************************
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

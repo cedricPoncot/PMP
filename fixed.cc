@@ -113,10 +113,84 @@ namespace fp{
 			}
 		}
 	}
-}
+
 		
-
-
+	template<std::size_t I1, std::size_t F1, std::size_t I2, std::size_t F2>
+	bool  operator==(fixed <I1 , F1> lhs , fixed <I2 , F2> rhs){
+		int64_t res0=lhs.value;
+		int64_t res1=rhs.value;
+		if(F1==F2){
+			return res0==res1;
+		}
+		else if(F1>F2){
+			res1=rhs.value<<(F1-F2);
+		}
+		else{
+			res0=lhs.value<<(F2-F1);
+		}
+		return res0==res1;
+	}
+	template<std::size_t I1, std::size_t F1, std::size_t I2, std::size_t F2>
+	bool  operator<(fixed <I1, F1> lhs , fixed <I2, F2> rhs){
+		int64_t res0=lhs.value;
+		int64_t res1=rhs.value;
+		if(F1==F2){
+			return res0<res1;
+		}
+		else if(F1>F2){
+			res1=rhs.value<<(F1-F2);
+		}
+		else{
+			res0=lhs.value<<(F2-F1);
+		}
+		return res0<res1;
+	}
+	template<std::size_t I1, std::size_t F1, std::size_t I2, std::size_t F2>
+	bool  operator>(fixed <I1, F1> lhs , fixed <I2, F2> rhs){
+		int64_t res0=lhs.value;
+		int64_t res1=rhs.value;
+		if(F1==F2){
+			return res0>res1;
+		}
+		else if(F1>F2){
+			res1=rhs.value<<(F1-F2);
+		}
+		else{
+			res0=lhs.value<<(F2-F1);
+		}
+		return res0>res1;
+	}
+	template<std::size_t I1, std::size_t F1, std::size_t I2, std::size_t F2>
+	bool  operator<=(fixed <I1, F1> lhs , fixed <I2, F2> rhs){
+		int64_t res0=lhs.value;
+		int64_t res1=rhs.value;
+		if(F1==F2){
+			return res0<=res1;
+		}
+		else if(F1>F2){
+			res1=rhs.value<<(F1-F2);
+		}
+		else{
+			res0=lhs.value<<(F2-F1);
+		}
+		return res0<=res1;
+	}
+	template<std::size_t I1, std::size_t F1, std::size_t I2, std::size_t F2>
+	bool  operator>=(fixed <I1, F1> lhs , fixed <I2, F2> rhs){
+		int64_t res0=lhs.value;
+		int64_t res1=rhs.value;
+		if(F1==F2){
+			return res0>=res1;
+		}
+		else if(F1>F2){
+			res1=rhs.value<<(F1-F2);
+		}
+		else{
+			res0=lhs.value<<(F2-F1);
+		}
+		return res0>=res1;
+	}
+}
 
 
 

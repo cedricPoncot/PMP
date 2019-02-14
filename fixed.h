@@ -126,7 +126,7 @@ namespace fp {
 		}
 		template<std::size_t  OtherInt , std::size_t  OtherFrac>
 		fixed& operator-=( const fixed <OtherInt , OtherFrac >&  other ){
-			this->value=*this+other;
+			this->value=*this-other;
 			return *this;
 		}
 	
