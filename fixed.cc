@@ -54,7 +54,6 @@ namespace fp{
 			else{
 				res=(lhs.value>>(F2-F1))+rhs.value;
 				if(res>fixed_traits<fixed<I2,F2>>::max().value || res<fixed_traits<fixed<I2,F2>>::min().value){
-				
 					throw std::overflow_error("Debordement de bit");
 				}
 				return res;
