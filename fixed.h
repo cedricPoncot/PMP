@@ -154,7 +154,7 @@ namespace fp {
 	int64_t operator-(fixed <I1, F1> lhs , fixed <I2, F2> rhs);
 
 	template<std::size_t I1, std::size_t F1, std::size_t I2, std::size_t F2>
-	int64_t operator*(fixed <I1, F1> lhs , fixed <I2, F2> rhs);
+	fixed<std::max(I1,I2),2> operator*(fixed <I1, F1> lhs , fixed <I2, F2> rhs);
 
 	template<std::size_t I1, std::size_t F1, std::size_t I2, std::size_t F2>
 	int64_t operator/(fixed <I1, F1> lhs , fixed <I2, F2> rhs);

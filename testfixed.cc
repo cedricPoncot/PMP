@@ -401,6 +401,80 @@ TEST(FixedTest, operateurInf3) {
 	fp::fixed<5,5> g(2.25);
 	EXPECT_FALSE(f<g);
 }
+//******************Test Operateur > *****************************
+TEST(FixedTest, operateurSup0) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<4,4> g(2.25);
+	EXPECT_FALSE(f>g);
+}
+TEST(FixedTest, operateurSup1) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<4,4> g(2.5);
+	EXPECT_FALSE(f>g);
+}
+TEST(FixedTest, operateurSup2) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<5,5> g(2.5);
+	EXPECT_FALSE(f>g);
+}
+TEST(FixedTest, operateurSup3) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<5,5> g(2.25);
+	EXPECT_FALSE(f>g);
+}
+//******************Test Operateur <= *****************************
+TEST(FixedTest, operateurInfEgal0) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<4,4> g(2.25);
+	EXPECT_TRUE(f<=g);
+}
+TEST(FixedTest, operateurInfEgal1) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<4,4> g(2.5);
+	EXPECT_TRUE(f<=g);
+}
+TEST(FixedTest, operateurInfEgal2) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<5,5> g(2.5);
+	EXPECT_TRUE(f<=g);
+}
+TEST(FixedTest, operateurInfEgal3) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<5,5> g(2.25);
+	EXPECT_TRUE(f<=g);
+}
+//******************Test Operateur >= *****************************
+TEST(FixedTest, operateurSupEgal0) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<4,4> g(2.25);
+	EXPECT_TRUE(f>=g);
+}
+TEST(FixedTest, operateurSupEgal1) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<4,4> g(2.5);
+	EXPECT_FALSE(f>=g);
+}
+TEST(FixedTest, operateurSupEgal2) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<5,5> g(2.5);
+	EXPECT_FALSE(f>=g);
+}
+TEST(FixedTest, operateurSupEgal3) {
+	fp::fixed<4,4> f(2.25);
+	fp::fixed<5,5> g(2.25);
+	EXPECT_TRUE(f>=g);
+}
+//***********Test opérateur *******************************
+TEST(FixedTest,operateurFois){
+	fp::fixed<3,2> f(1.0);
+	fp::fixed<3,2> g(1.0);
+	EXPECT_EQ((f*g).value,4);
+}
+TEST(FixedTest,operateurFois2){
+	fp::fixed<3,2> f(1.0);
+	fp::fixed<3,2> g(1.0);
+	EXPECT_EQ((f*g).value,4);
+}
 //********************* FIN TEST **********************************************
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

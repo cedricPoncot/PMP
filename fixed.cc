@@ -114,6 +114,61 @@ namespace fp{
 		}
 	}
 
+	template<std::size_t I1, std::size_t F1, std::size_t I2, std::size_t F2>
+	fixed<std::max(I1,I2),std::max(F1,F2)> operator*(fixed <I1, F1> lhs , fixed <I2, F2> rhs){
+		return fixed <2,2>(2.0);
+		
+		fixed<std::max(I1,I2),std::max(F1,F2)>
+		/*
+		if(I1>I2){
+			if(F1==F2){
+				res=((lhs.value * rhs.value) >> F1);
+				if(res>fixed_traits<fixed<I1,F1>>::max().value || res<fixed_traits<fixed<I1,F1>>::lowest().value){
+					throw std::overflow_error("Debordement de bit");
+				}
+				return res;
+			}
+			else if(F1>F2){
+				res=((rhs.value<<(F1-F2))*lhs.value)>>F1;
+				if(res>fixed_traits<fixed<I1,F1>>::max().value || res<fixed_traits<fixed<I1,F1>>::lowest().value){
+					throw std::overflow_error("Debordement de bit");
+				}
+				return res;
+			}
+			else{
+				res=((lhs.value<<(F2-F1))*rhs.value)>>F2;
+				if(res>fixed_traits<fixed<I1,F2>>::max().value || res<fixed_traits<fixed<I1,F2>>::lowest().value){
+				
+					throw std::overflow_error("Debordement de bit");
+				}
+				return res;
+			}
+		}
+		else{
+			if(F1==F2){
+				res=(lhs.value*rhs.value)>>F1;
+				if(res>fixed_traits<fixed<I2,F1>>::max().value || res<fixed_traits<fixed<I2,F1>>::lowest().value){
+					throw std::overflow_error("Debordement de bit");
+				}
+				return res;
+			}
+			else if(F1>F2){
+				res=((rhs.value<<(F1-F2))*lhs.value)>>F1;
+				if(res>fixed_traits<fixed<I2,F1>>::max().value || res<fixed_traits<fixed<I2,F1>>::lowest().value){
+					throw std::overflow_error("Debordement de bit");
+				}
+				return res;
+			}
+			else{
+				res=((lhs.value<<(F2-F1))*rhs.value)>>F2;
+				if(res>fixed_traits<fixed<I2,F2>>::max().value || res<fixed_traits<fixed<I2,F2>>::lowest().value){
+				
+					throw std::overflow_error("Debordement de bit");
+				}
+				return res;
+			}
+		} */
+	}
 		
 	template<std::size_t I1, std::size_t F1, std::size_t I2, std::size_t F2>
 	bool  operator==(fixed <I1 , F1> lhs , fixed <I2 , F2> rhs){
