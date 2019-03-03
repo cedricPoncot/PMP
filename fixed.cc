@@ -5,12 +5,8 @@
 #include "fixed.h"
 
 namespace fp{
-		
-
-		
-	
 	template<std::size_t I1, std::size_t F1, std::size_t I2, std::size_t F2>
-	int64_t operator+(fixed <I1, F1> lhs , fixed <I2, F2> rhs){
+	fixed<implem::sizeFracAddition(I1,F1,I2,F2),implem::sizeIntAddition(I1,F1,I2,F2)> operator+(fixed <I1, F1> lhs , fixed <I2, F2> rhs){
 		int64_t res;
 		if(I1>I2){
 			if(F1==F2){
@@ -117,9 +113,9 @@ namespace fp{
 	template<std::size_t I1, std::size_t F1, std::size_t I2, std::size_t F2>
 	fixed<std::max(I1,I2),std::max(F1,F2)> operator*(fixed <I1, F1> lhs , fixed <I2, F2> rhs){
 		return fixed <2,2>(2.0);
-		
-		fixed<std::max(I1,I2),std::max(F1,F2)>
+
 		/*
+		fixed<std::max(I1,I2),std::max(F1,F2)>
 		if(I1>I2){
 			if(F1==F2){
 				res=((lhs.value * rhs.value) >> F1);

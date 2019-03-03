@@ -9,7 +9,34 @@
 #include <cassert>
 #include <stdexcept>
 #include <type_traits>
-
+namespace implem {
+	constexpr std::size_t sizeFracAddition(std::size_t I1,std::size_t F1,std::size_t I2,std::size_t F2){
+		if(std::max(I1,I2)+std::max(F1,F2)+1>64){
+			if(64-std::max(I1,I2)-1>0){
+				return 64-std::max(I1,I2)-1;
+			}
+			else{
+				return 0;
+			}
+		}
+		else{
+			return std::max(F1,F2);
+		}
+	}
+    constexpr std::size_t sizeIntAddition(std::size_t I1,std::size_t F1,std::size_t I2,std::size_t F2){
+		if(std::max(I1,I2)+std::max(F1,F2)+1>64){
+			if(64-std::max(I1,I2)-1>0){
+				return std::max(I1,I2)+1;
+			}
+			else{
+				return 64;
+			}
+		}
+		else{
+			return std::max(I1,I2)+1;
+		}
+	}
+};
 namespace fp {
 	/*
 	* fixed  point  type
@@ -148,7 +175,7 @@ namespace fp {
 	* arithmetic  operators
 	*/
 	template<std::size_t I1, std::size_t F1, std::size_t I2, std::size_t F2>
-	int64_t operator+(fixed <I1, F1> lhs , fixed <I2, F2> rhs);
+	fixed<implem::sizeFracAddition(I1,F1,I2,F2),implem::sizeIntAddition(I1,F1,I2,F2)> operator+(fixed <I1, F1> lhs , fixed <I2, F2> rhs);
 
 	template<std::size_t I1, std::size_t F1, std::size_t I2, std::size_t F2>
 	int64_t operator-(fixed <I1, F1> lhs , fixed <I2, F2> rhs);
