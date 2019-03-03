@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/user/Documents/PMP/Projet/fixed.cc
+cstdio
+-
+cstdlib
+-
+cmath
+-
+iostream
+-
+fixed.h
+/home/user/Documents/PMP/Projet/fixed.h
+
+/home/user/Documents/PMP/Projet/fixed.h
+cstddef
+-
+cstdio
+-
+cstdlib
+-
+cmath
+-
+iostream
+-
+cassert
+-
+stdexcept
+-
+type_traits
+-
+
+/home/user/Documents/PMP/Projet/fp.cc
+fixed.h
+/home/user/Documents/PMP/Projet/fixed.h
+

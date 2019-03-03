@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -std=c++14 -O2 -g  -rdynamic CMakeFiles/testfixed.dir/testfixed.cc.o CMakeFiles/testfixed.dir/googletest/googletest/src/gtest-all.cc.o  -o testfixed -lpthread 

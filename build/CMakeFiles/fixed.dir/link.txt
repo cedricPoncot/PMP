@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -std=c++14 -O2 -g  -rdynamic CMakeFiles/fixed.dir/fixed.cc.o CMakeFiles/fixed.dir/fp.cc.o  -o fixed 
